@@ -1,6 +1,6 @@
 # Key-Value Pairs Parser Plugin for [Fluentd](https://github.com/fluent/fluentd)
 
-This plugin is forked [fluent-plugin-kv-parser](https://github.com/kiyoto/fluent-plugin-kv-parser).
+This plugin is forked [/fluent-plugin-kvp-parser](https://github.com/mosuka/fluent-plugin-kvp-parser).
 
 ## Overview
 
@@ -25,7 +25,7 @@ with the event's time being `2013-01-01T12:34:00`
 For Fluentd,
 
 ```
-gem install fluent-plugin-kvp-parser
+fluentd-gem install fluent-plugin-kvp-parser
 ```
 
 For [Treasure Agent](https://docs.treasuredata.com/articles/td-agent),
@@ -34,7 +34,7 @@ For [Treasure Agent](https://docs.treasuredata.com/articles/td-agent),
 /usr/sbin/td-agent-gem install fluent-plugin-kvp-parser
 ```
 
-Then, for parser-plugin enabled input plugins (including [in_tail](https://docs.fluentd.org/articles/in_tail), [in_tcp](https://docs.fluentd.org/articles/in_tcp), [in_udp](https://docs.fluentd.org/articles/in_udp) and [in_syslog](https://docs.fluentd.org/articles/syslog)), you can just write `format kv`
+Then, for parser-plugin enabled input plugins (including [in_tail](https://docs.fluentd.org/articles/in_tail), [in_tcp](https://docs.fluentd.org/articles/in_tcp), [in_udp](https://docs.fluentd.org/articles/in_udp) and [in_syslog](https://docs.fluentd.org/articles/syslog)), you can just write `format kvp`
 
 For example, using `in_tcp` with the following configuration:
 
