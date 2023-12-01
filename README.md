@@ -1,10 +1,10 @@
 # Key-Value Pairs Parser Plugin for [Fluentd](https://github.com/fluent/fluentd)
 
-This plugin is forked [/fluent-plugin-kvp-parser](https://github.com/mosuka/fluent-plugin-kvp-parser).
+This plugin is forked [fluent-plugin-kvp-parser](https://github.com/mosuka/fluent-plugin-kvp-parser).
 
 ## Overview
 
-This is a parser plugin for Fluentd. Learn more about parser plugins [here](https://docs.fluentd.org/articles/parser-plugin-overview).
+This is a parser plugin for Fluentd. Learn more about parser plugins [here](https://docs.fluentd.org/configuration/parse-section).
 
 This plugin allows you to parse inputs that look like key-value pairs. For example, if your text logs look like
 
@@ -28,22 +28,16 @@ For Fluentd,
 fluentd-gem install fluent-plugin-kvp-parser
 ```
 
-For [Treasure Agent](https://docs.treasuredata.com/articles/td-agent),
+Then, for parser-plugin enabled input plugins (including [tail](https://docs.fluentd.org/input/tail), [tcp](https://docs.fluentd.org/input/tcp), [udp](https://docs.fluentd.org/input/udp), [syslog](https://docs.fluentd.org/input/syslog) and most notably [multi_format](https://github.com/repeatedly/fluent-plugin-multi-format-parser), you can write `format kvp`
 
-```
-/usr/sbin/td-agent-gem install fluent-plugin-kvp-parser
-```
-
-Then, for parser-plugin enabled input plugins (including [in_tail](https://docs.fluentd.org/articles/in_tail), [in_tcp](https://docs.fluentd.org/articles/in_tcp), [in_udp](https://docs.fluentd.org/articles/in_udp) and [in_syslog](https://docs.fluentd.org/articles/syslog)), you can just write `format kvp`
-
-For example, using `in_tcp` with the following configuration:
+For example, using `tcp` with the following configuration:
 
 ```aconf
 <source>
   type tcp
   port 24225
   tag kv_log
-  format kv
+  format kvp
   time_key my_time
   types k1:integer,my_time:time
 </source>
@@ -73,4 +67,4 @@ gives
 
 * **kv_char**: The string to split the key from the value. By default, it is "=".
 * **time_key**: The time key field among the key-value pairs to be used as the time for the event. If missing or unparsable, the current time is used.
-* **types**: The parameter to convert the values of key-value pairs. The syntax is `<key_name>:<type_name>`. For example, to convert the key "k1" into integer, write `types k1:integer`. For the `time` type, one can write `<key_name>:time:<time_format>` to convert the string into a time object. For example, to convert the string "my_time=12/31/2014 12:00:00", use `my_time:time:%m/%d/%Y %H:%M:%S`. This parameter is same as the one used for [in_tail](https://docs.fluentd.org/articles/in_tail) and others (see under the "types" section over there).
+* **types**: Is the same as for other [parse plugins](https://docs.fluentd.org/configuration/parse-section#types-parameter).The parameter to convert the values of key-value pairs. The syntax is `<key_name>:<type_name>`. For example, to convert the key "k1" into an integer, write `types k1:integer`. For the `time` type, one can write `<key_name>:time:<time_format>` to convert the string into a time object. For example, to convert the string "my_time=12/31/2014 12:00:00", use `my_time:time:%m/%d/%Y %H:%M:%S`. See a more detailed description of the [time parameters](https://docs.fluentd.org/configuration/parse-section#time-parameters)
